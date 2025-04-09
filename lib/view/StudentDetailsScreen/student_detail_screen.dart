@@ -1,6 +1,6 @@
-import 'package:attandanceapp/Utils/PopupMenuButton/popup_menu.dart';
+import 'package:attandanceapp/Utils/CostumButton/custome_button.dart';
 import 'package:attandanceapp/Utils/SearchBar/search_bar.dart';
-import 'package:attandanceapp/view/AddBatches/add_batches_screen.dart';
+import 'package:attandanceapp/view/EnterStudentDetail/enter_student_detail.dart';
 import 'package:attandanceapp/view/Home/home_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,14 +8,14 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/utils.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class StudentDetailScreen extends StatefulWidget {
+  const StudentDetailScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<StudentDetailScreen> createState() => _StudentDetailScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _StudentDetailScreenState extends State<StudentDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Center(
                       child: Container(
-                        height: 500.h,
+                        height: 600.h,
                         width: 300.w,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -56,13 +56,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                   vertical: 10,
                                   horizontal: 20,
                                 ),
-                                child: Popup(),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Icon(Icons.arrow_back, size: 30.sp),
+                                  ),
+                                ),
                               ),
+                              SizedBox(height: 60.h),
 
                               CustomSearchBar(),
-                              SizedBox(height: 5.h),
+                              SizedBox(height: 8.h),
                               Text(
-                                'Batches',
+                                'Student Details',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18.sp,
@@ -88,43 +97,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                             20,
                                           ),
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              'Batch1',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18.sp,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                        child: Center(
+                                          child: Text(
+                                            'Ali',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            Icon(Icons.close, size: 20.sp),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     );
                                   },
                                 ),
                               ),
-
-                              SizedBox(height: 10.h),
-                              model.isLoading
-                                  ? CircularProgressIndicator()
-                                  : FloatingActionButton(
-                                    onPressed: () {
-                                      Get.to(AddBatches());
-                                    },
-                                    backgroundColor: const Color(0xFF64B5F6),
-                                    elevation: 5,
-                                    shape: const CircleBorder(),
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                      size: 30,
-                                    ),
-                                  ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 30,
+                                ),
+                                child: CustomeButton(
+                                  height: 40.h,
+                                  width: 200.w,
+                                  text: 'Add New Student',
+                                  onPressed: () {
+                                    Get.to(EnterStudentScreen());
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                         ),

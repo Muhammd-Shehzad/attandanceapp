@@ -6,10 +6,12 @@
     "configurations": [
         
         
+        
         {
             "name": "attandanceapp",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main.dart"
         },
         {
             "name": "attandanceapp (profile mode)",

@@ -1,7 +1,6 @@
 import 'package:attandanceapp/Utils/CostumButton/custome_button.dart';
 import 'package:attandanceapp/Utils/TextFiledForm/text_field_form.dart';
 import 'package:attandanceapp/view/AddBatches/add_batches_screen_provider.dart';
-import 'package:attandanceapp/view/Auth/SignUp/signup_screen_provider.dart';
 import 'package:attandanceapp/view/BatchDeailsScreen/batch_detalis_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +18,8 @@ class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => AddBatchesScreenProvider(),
-      child: Consumer<AddBatchesScreenProvider>(
+      create: (context) => EnterStudentDetailProvider(),
+      child: Consumer<EnterStudentDetailProvider>(
         builder:
             (context, model, child) => Scaffold(
               body: Form(
@@ -179,6 +178,8 @@ class _EditScreenState extends State<EditScreen> {
                                 ),
                                 SizedBox(height: 10.h),
                                 CustomeButton(
+                                  height: 40.h,
+                                  width: 200.w,
                                   text: 'Save',
                                   onPressed: () {
                                     // if (model.formKey.currentState!

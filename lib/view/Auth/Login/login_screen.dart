@@ -112,6 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 model.isloading
                                     ? CircularProgressIndicator()
                                     : CustomeButton(
+                                      height: 40.h,
+                                      width: 200.w,
                                       text: 'Login',
                                       onPressed: () {
                                         if (model.formKey.currentState!

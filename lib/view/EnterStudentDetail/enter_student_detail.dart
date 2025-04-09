@@ -1,20 +1,20 @@
 import 'package:attandanceapp/Utils/CostumButton/custome_button.dart';
 import 'package:attandanceapp/Utils/TextFiledForm/text_field_form.dart';
 import 'package:attandanceapp/view/AddBatches/add_batches_screen_provider.dart';
-import 'package:attandanceapp/view/EditScreen/edit_screen.dart';
+import 'package:attandanceapp/view/BatchDeailsScreen/batch_detalis_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class AddBatches extends StatefulWidget {
-  const AddBatches({super.key});
+class EnterStudentScreen extends StatefulWidget {
+  const EnterStudentScreen({super.key});
 
   @override
-  State<AddBatches> createState() => _AddBatchesState();
+  State<EnterStudentScreen> createState() => _EnterStudentScreenState();
 }
 
-class _AddBatchesState extends State<AddBatches> {
+class _EnterStudentScreenState extends State<EnterStudentScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -51,6 +51,7 @@ class _AddBatchesState extends State<AddBatches> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(height: 30.h),
+
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 10,
@@ -69,22 +70,12 @@ class _AddBatchesState extends State<AddBatches> {
                                           size: 30.sp,
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () {
-                                          Get.to(EditScreen());
-                                        },
-                                        child: const Icon(
-                                          Icons.edit,
-                                          size: 40,
-                                          color: Color(0xFF5F6368),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 48.h),
+                                SizedBox(height: 50.h),
                                 Text(
-                                  'Enter Batches Details',
+                                  'Enter Student Details',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18.sp,
@@ -92,16 +83,7 @@ class _AddBatchesState extends State<AddBatches> {
                                   ),
                                 ),
                                 SizedBox(height: 10.h),
-                                TextFieldForm(
-                                  controller: model.batchNoController,
-                                  text: 'Batch No',
-                                  validationText: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your Batch No';
-                                    }
-                                  },
-                                ),
-                                SizedBox(height: 10.h),
+
                                 SizedBox(
                                   height: 40.h,
                                   width: 283.w,
@@ -124,7 +106,92 @@ class _AddBatchesState extends State<AddBatches> {
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
                                         value: model.selectedValue,
-                                        hint: Text('Select Location'),
+                                        hint: Text('Select Batch No'),
+                                        isExpanded: true,
+                                        icon: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.blue,
+                                        ),
+                                        items:
+                                            model.locaton
+                                                .map(
+                                                  (String item) =>
+                                                      DropdownMenuItem(
+                                                        value: item,
+                                                        child: Text(item),
+                                                      ),
+                                                )
+                                                .toList(),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            model.selectedValue = newValue;
+                                          });
+                                        },
+                                        dropdownColor: Colors.white,
+                                        style: TextStyle(color: Colors.black),
+                                        menuMaxHeight: 200.h,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
+
+                                TextFieldForm(
+                                  controller: model.batchNoController,
+                                  text: 'Name',
+                                  validationText: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your Batch No';
+                                    }
+                                  },
+                                ),
+                                SizedBox(height: 10.h),
+
+                                TextFieldForm(
+                                  controller: model.noOfStudentController,
+                                  text: 'Domain',
+                                  validationText: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your Student No';
+                                    }
+                                  },
+                                ),
+                                SizedBox(height: 10.h),
+
+                                TextFieldForm(
+                                  controller: model.leaderNameController,
+                                  text: 'Mobil No',
+                                  validationText: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your Leader Name';
+                                    }
+                                  },
+                                ),
+                                SizedBox(height: 10.h),
+
+                                SizedBox(
+                                  height: 40.h,
+                                  width: 283.w,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w,
+                                    ),
+
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:
+                                            model.selectedValue == null
+                                                ? Colors.red
+                                                : Colors.blue,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.white,
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String>(
+                                        value: model.selectedValue,
+                                        hint: Text('Gender'),
                                         isExpanded: true,
                                         icon: Icon(
                                           Icons.arrow_drop_down,
@@ -154,38 +221,8 @@ class _AddBatchesState extends State<AddBatches> {
                                 ),
                                 SizedBox(height: 10.h),
                                 TextFieldForm(
-                                  controller: model.noOfStudentController,
-                                  text: 'Student No',
-                                  validationText: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your Student No';
-                                    }
-                                  },
-                                ),
-                                SizedBox(height: 10.h),
-                                Text(
-                                  'Batche Leader Details',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 10.h),
-
-                                TextFieldForm(
-                                  controller: model.leaderNameController,
-                                  text: 'Leader Name',
-                                  validationText: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your Leader Name';
-                                    }
-                                  },
-                                ),
-                                SizedBox(height: 10.h),
-                                TextFieldForm(
                                   controller: model.lederMobilController,
-                                  text: 'Leader No',
+                                  text: 'Email',
                                   validationText: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter your Leader No';
@@ -199,9 +236,8 @@ class _AddBatchesState extends State<AddBatches> {
                                   text: 'Save',
                                   onPressed: () {
                                     if (model.formKey.currentState!
-                                        .validate()) {
-                                      model.addBatcheDetails();
-                                    }
+                                        .validate()) {}
+                                    Get.to(BatchDetailScreen());
                                   },
                                 ),
                               ],
@@ -241,145 +277,3 @@ class _AddBatchesState extends State<AddBatches> {
     );
   }
 }
-
-
-
-// Stack(
-//                   children: [
-//                     Center(
-//                       child: Container(
-//                         height: 550.h,
-//                         width: 300.w,
-//                         decoration: BoxDecoration(
-//                           color: Colors.white,
-//                           borderRadius: BorderRadius.circular(10),
-//                         ),
-//                       ),
-//                     ),
-//                     Positioned(
-//                       top: 8.h,
-//                       left: 100.w,
-//                       right: 100.w,
-//                       child: Container(
-//                         height: 120.h,
-//                         width: 120.w,
-//                         decoration: BoxDecoration(
-//                           color: Colors.white,
-//                           border: Border.all(
-//                             color: Color(0xFF64B5F6),
-//                             width: 3,
-//                           ),
-//                           shape: BoxShape.circle,
-//                         ),
-//                         child: Center(
-//                           child: Image.asset(
-//                             'assets/logo1.png',
-//                             height: 100.h,
-//                             width: 100.w,
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                     Positioned(
-//                       top: 140.h,
-//                       left: 33.w,
-//                       right: 33.w,
-//                       child: SingleChildScrollView(
-//                         child: Column(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             SizedBox(height: 20),
-
-//                             Text(
-//                               'Enter Batch Details',
-//                               style: TextStyle(
-//                                 color: Colors.black,
-//                                 fontSize: 20.sp,
-//                                 fontWeight: FontWeight.bold,
-//                               ),
-//                             ),
-//                             SizedBox(height: 10.h),
-//                             TextFieldForm(
-//                               text: 'Batch No',
-
-//                               validationText: (value) {
-//                                 if (value == null || value.isEmpty) {
-//                                   return 'Please enter your Batch No';
-//                                 }
-//                               },
-//                             ),
-//                             SizedBox(
-//                               height: 40.h,
-//                               width: 278.w,
-//                               child: Container(
-//                                 padding: EdgeInsets.symmetric(horizontal: 12.w),
-
-//                                 decoration: BoxDecoration(
-//                                   border: Border.all(
-//                                     color: Colors.blue,
-//                                     width: 1.5,
-//                                   ),
-//                                   borderRadius: BorderRadius.circular(8),
-//                                   color: Colors.white,
-//                                 ),
-//                                 child: DropdownButtonHideUnderline(
-//                                   child: DropdownButton<String>(
-//                                     value: model.selectedValue,
-//                                     hint: Text('Select Location'),
-//                                     isExpanded: true,
-//                                     icon: Icon(
-//                                       Icons.arrow_drop_down,
-//                                       color: Colors.blue,
-//                                     ),
-//                                     items:
-//                                         model.locaton
-//                                             .map(
-//                                               (String item) => DropdownMenuItem(
-//                                                 value: item,
-//                                                 child: Text(item),
-//                                               ),
-//                                             )
-//                                             .toList(),
-//                                     onChanged: (String? newValue) {
-//                                       setState(() {
-//                                         model.selectedValue = newValue;
-//                                       });
-//                                     },
-//                                     dropdownColor: Colors.white,
-//                                     style: TextStyle(color: Colors.black),
-//                                     menuMaxHeight: 200.h,
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                     Positioned(
-//                       top: 380.h,
-//                       left: 40.w,
-//                       right: 40.w,
-//                       child:
-//                           model.isLoading
-//                               ? CircularProgressIndicator()
-//                               : Positioned(
-//                                 top: 500.h,
-//                                 left: 40.w,
-//                                 right: 40.w,
-//                                 child:
-//                                     model.isLoading
-//                                         ? const Center(
-//                                           child: CircularProgressIndicator(),
-//                                         )
-//                                         : CustomeButton(
-//                                           text: 'Add Batch',
-//                                           onPressed: () {
-//                                             if (model.formKey.currentState!
-//                                                 .validate()) {}
-//                                           },
-//                                         ),
-//                               ),
-//                     ),
-//                   ],
-//                 ),

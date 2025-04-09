@@ -1,7 +1,6 @@
 import 'package:attandanceapp/Utils/CostumButton/custome_button.dart';
-import 'package:attandanceapp/Utils/TextFiledForm/text_field_form.dart';
 import 'package:attandanceapp/view/AddBatches/add_batches_screen_provider.dart';
-import 'package:attandanceapp/view/Auth/SignUp/signup_screen_provider.dart';
+import 'package:attandanceapp/view/StudentDetailsScreen/student_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,8 +17,8 @@ class _BatchDetailScreenState extends State<BatchDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => AddBatchesScreenProvider(),
-      child: Consumer<AddBatchesScreenProvider>(
+      create: (context) => EnterStudentDetailProvider(),
+      child: Consumer<EnterStudentDetailProvider>(
         builder:
             (context, model, child) => Scaffold(
               body: Form(
@@ -51,22 +50,35 @@ class _BatchDetailScreenState extends State<BatchDetailScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(height: 40.h),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Icon(Icons.arrow_back, size: 30.sp),
-                                    InkWell(
-                                      onTap: () {
-                                        // Get.to();
-                                      },
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 40,
-                                        color: Color(0xFF5F6368),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          size: 30.sp,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      InkWell(
+                                        onTap: () {
+                                          // Get.to();
+                                        },
+                                        child: const Icon(
+                                          Icons.edit,
+                                          size: 40,
+                                          color: Color(0xFF5F6368),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(height: 50.h),
                                 Text(
@@ -110,7 +122,7 @@ class _BatchDetailScreenState extends State<BatchDetailScreen> {
                                   TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'Batch Name:',
+                                        text: 'Location:',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 20.sp,
@@ -119,7 +131,33 @@ class _BatchDetailScreenState extends State<BatchDetailScreen> {
                                       ),
                                       WidgetSpan(child: SizedBox(width: 5.w)),
                                       TextSpan(
-                                        text: 'Batch1',
+                                        text: 'Peshawar',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.sp,
+
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
+
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Student No:',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      WidgetSpan(child: SizedBox(width: 5.w)),
+                                      TextSpan(
+                                        text: '30',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 20.sp,
@@ -132,13 +170,82 @@ class _BatchDetailScreenState extends State<BatchDetailScreen> {
                                 ),
 
                                 SizedBox(height: 10.h),
+                                Text(
+                                  'Batches Leader Details',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
+
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Leader Name:',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      WidgetSpan(child: SizedBox(width: 5.w)),
+                                      TextSpan(
+                                        text: 'Shehzad khan',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.sp,
+
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
+
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Leader No:',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      WidgetSpan(child: SizedBox(width: 5.w)),
+                                      TextSpan(
+                                        text: '03169727675',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20.sp,
+
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+
                                 CustomeButton(
-                                  text: 'Save',
+                                  height: 40.h,
+                                  width: 200.w,
+                                  text: 'Attandanced',
+                                  onPressed: () {},
+                                ),
+                                SizedBox(height: 20.h),
+
+                                CustomeButton(
+                                  height: 40.h,
+                                  width: 200.w,
+                                  text: 'Student Details',
                                   onPressed: () {
-                                    if (model.formKey.currentState!
-                                        .validate()) {
-                                      model.addBatcheDetails();
-                                    }
+                                    Get.to(StudentDetailScreen());
                                   },
                                 ),
                               ],

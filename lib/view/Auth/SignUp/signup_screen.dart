@@ -110,6 +110,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 model.isloading
                                     ? CircularProgressIndicator()
                                     : CustomeButton(
+                                      height: 40.h,
+                                      width: 200.w,
                                       text: 'Sign Up',
                                       onPressed: () {
                                         if (model.formKey.currentState!

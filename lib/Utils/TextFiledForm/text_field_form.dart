@@ -5,7 +5,12 @@ class TextFieldForm extends StatelessWidget {
   final validationText;
   final controller;
 
-  TextFieldForm({super.key, this.text, this.validationText, this.controller});
+  const TextFieldForm({
+    super.key,
+    this.text,
+    this.validationText,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
